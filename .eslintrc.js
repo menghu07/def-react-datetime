@@ -38,7 +38,7 @@ module.exports = {
         // Enforce the consistent use of either backticks, double, or single quotes
         "quotes": [2, "single", { "avoidEscape": true, "allowTemplateLiterals": true }],
         // Enforce using tabs for indentation
-        "indent": [2, "tab", { "SwitchCase": 1 }]
+        "indent": [2, 4, { "SwitchCase": 1 }]
     },
     "parserOptions": {
         "sourceType": "module"

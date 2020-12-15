@@ -1,7 +1,7 @@
 import React from 'react';
 import ViewNavigation from '../parts/ViewNavigation';
 
-export default class MonthsView extends React.Component {
+export default class QuartersView extends React.Component {
     render() {
         return (
             <div className="rdtMonths">

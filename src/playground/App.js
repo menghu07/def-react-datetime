@@ -12,17 +12,17 @@ import 'moment/locale/zh-cn';
 moment.locale('zh-cn');
 
 class App extends React.Component { 
-	state = {
-		date: new Date()
-	}
+    state = {
+        date: new Date()
+    };
 
-	render() {
-		return (
-			<div>
-				<DefDateTime closeOnSelect={true} dateFormat={'YYYY-MM-DD'} timeFormat={false} />
-			</div>
-		);
-	}
+    render() {
+        return (
+            <div>
+                <DefDateTime closeOnSelect={true} dateFormat={'YYYY-MM'} timeFormat={false} />
+            </div>
+        );
+    }
 }
 
 export default App;

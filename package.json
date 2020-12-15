@@ -1,6 +1,6 @@
 {
   "name": "def-react-datetime",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A lightweight but complete datetime picker React.js component",
   "homepage": "https://github.com/menghu07/def-react-datetime",
   "repository": {
@@ -16,7 +16,7 @@
   ],
   "scripts": {
     "build": "webpack --config config/webpack.config.build.js",
-    "lint": "eslint src/DateTime.js test/ && echo 'Linting OK! 💪'",
+    "lint": "eslint src/DefDateTime.js test/ && echo 'Linting OK! 💪'",
     "notify-pre-commit-hook": "echo '### Starting pre-commit hook 🦄'",
     "playground": "node scripts/start.js",
     "test": "jest",
@@ -98,7 +98,7 @@
     "react-onclickoutside": "^6.9.0",
     "react-test-renderer": "^16.5.0",
     "resolve": "1.12.2",
-    "resolve-url-loader": "3.1.1",
+    "resolve-url-loader": "^3.1.2",
     "sass-loader": "8.0.0",
     "semver": "6.3.0",
     "style-loader": "1.0.0",
