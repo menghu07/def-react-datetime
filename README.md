@@ -1,4 +1,4 @@
-# react-datetime
+# def-react-datetime
 
 [![Build Status](https://secure.travis-ci.org/arqex/react-datetime.svg)](https://travis-ci.org/arqex/react-datetime)
 [![npm version](https://badge.fury.io/js/react-datetime.svg)](http://badge.fury.io/js/react-datetime)
@@ -13,12 +13,12 @@ A date and time picker in the same React.js component. It can be used as a datep
 
 Install using npm:
 ```sh
-npm install --save react-datetime
+npm install --save def-react-datetime
 ```
 
 Install using yarn:
 ```sh
-yarn add react-datetime
+yarn add def-react-datetime
 ```
 
 ## Usage
@@ -27,10 +27,10 @@ yarn add react-datetime
 
 ```js
 // Import the library
-import Datetime from 'react-datetime';
+import DefDateTime from 'def-react-datetime';
 
 // return it from your components
-return <Datetime />;
+return <DefDateTime />;
 ```
 [See this example working](https://codesandbox.io/s/boring-dew-uzln3).
 
@@ -39,12 +39,12 @@ Do you want more examples? [Have a look at our resources gallery](resources.md).
 **Don't forget to add the [CSS stylesheet](https://github.com/arqex/react-datetime/blob/master/css/react-datetime.css) to make it work out of the box.**. You only need to do this once in your app:
 
 ```js
-import "react-datetime/css/react-datetime.css";
+import "def-react-datetime/css/def-react-datetime.css";
 ```
 
 ## API
 
-Below we have all the props that we can use with the `<DateTime>` component. There are also some methods that can be used imperatively.
+Below we have all the props that we can use with the `<DefDateTime>` component. There are also some methods that can be used imperatively.
 
 | Name         | Type    | Default | Description |
 | ------------ | ------- | ------- | ----------- |
@@ -87,7 +87,7 @@ Besides controlling the selected date, there is a navigation through months, yea
 To do so, we need to create our component with a `ref` prop amd use the reference.
 ```js
 // This would be the code to render the picker
-<DateTime ref="datetime" />
+<DefDateTime ref="datetime" />
 
 // ... once rendered we can use the imperative API
 // let's show the years view

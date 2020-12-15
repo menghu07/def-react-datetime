@@ -1,11 +1,15 @@
 // This file is the playground used for development purposes (npm run playground)
 // not part of the library
 import React from 'react';
-import Datetime from '../DateTime';
+import DefDateTime from '../DefDateTime';
 
 // import moment from 'moment';
 // import 'moment/locale/tzm-latn';
 // moment.locale('tzm-latn');
+
+import moment from 'moment';
+import 'moment/locale/zh-cn';
+moment.locale('zh-cn');
 
 class App extends React.Component { 
 	state = {
@@ -15,7 +19,7 @@ class App extends React.Component {
 	render() {
 		return (
 			<div>
-				<Datetime />
+				<DefDateTime closeOnSelect={true} dateFormat={'YYYY-MM-DD'} timeFormat={false} />
 			</div>
 		);
 	}

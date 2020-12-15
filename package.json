@@ -1,13 +1,13 @@
 {
   "name": "def-react-datetime",
-  "version": "4.4.4",
+  "version": "1.0.0",
   "description": "A lightweight but complete datetime picker React.js component",
   "homepage": "https://github.com/menghu07/def-react-datetime",
   "repository": {
     "type": "git",
     "url": "https://github.com/menghu07/def-react-datetime"
   },
-  "main": "./dist/react-datetime.cjs.js",
+  "main": "./dist/def-react-datetime.cjs.js",
   "typings": "./typings/DateTime.d.ts",
   "files": [
     "css",

@@ -4,7 +4,7 @@ const path = require('path');
 const outputPath = path.join(__dirname, '../dist/');
 
 const baseConfig = {
-	entry: ['./src/DateTime.js'],
+	entry: ['./src/DefDateTime.js'],
 	mode: 'production',
 
 	resolve: {
@@ -34,10 +34,10 @@ const umdConfig = {
 	...baseConfig,
 	output: {
 		path: outputPath,
-		library: 'Datetime',
+		library: 'DefDateTime',
 		libraryTarget: 'umd',
-		filename: 'react-datetime.umd.js',
-		auxiliaryComment: 'React datetime',
+		filename: 'def-react-datetime.umd.js',
+		auxiliaryComment: 'React defdatetime',
 		libraryExport: 'default'
 	}
 };
@@ -46,10 +46,10 @@ const cjsConfig = {
 	...baseConfig,
 	output: {
 		path: outputPath,
-		library: 'Datetime',
+		library: 'DefDateTime',
 		libraryTarget: 'commonjs2',
-		filename: 'react-datetime.cjs.js',
-		auxiliaryComment: 'React datetime'
+		filename: 'def-react-datetime.cjs.js',
+		auxiliaryComment: 'React defdatetime'
 	}
 };
 

@@ -18,7 +18,7 @@ const TYPES = PropTypes;
 const nofn = function () {};
 const datetype = TYPES.oneOfType([ TYPES.instanceOf(moment), TYPES.instanceOf(Date), TYPES.string ]);
 
-export default class Datetime extends React.Component {
+export default class DefDateTime extends React.Component {
 	static propTypes = {
 		value: datetype,
 		initialValue: datetype,
@@ -77,7 +77,7 @@ export default class Datetime extends React.Component {
 		renderView: ( _, renderFunc ) => renderFunc(),
 	}
 
-	// Make moment accessible through the Datetime class
+	// Make moment accessible through the DefDateTime class
 	static moment = moment;
 
 	constructor( props ) {
