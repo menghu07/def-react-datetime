@@ -321,7 +321,6 @@ describe('DefDateTime', () => {
         });
         it('dateFormat=YYYY-QQ', () => {
             const date = new Date(2000, 0, 15, 2, 2, 2, 2),
-                mDate = moment(date),
                 component = utils.createDefDateTime({ value: date, timeFormat: false, dateFormat: 'YYYY-QQ' });
             expect(utils.getInputValue(component)).toEqual('2000-Q1');
         });
