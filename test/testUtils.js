@@ -1,6 +1,6 @@
 import React from 'react'; // eslint-disable-line no-unused-vars
 import { mount, shallow } from 'enzyme';
-import DefDatetime from '../dist/def-react-datetime.cjs'; // eslint-disable-line no-unused-vars
+import DefDateTime from '../dist/def-react-datetime.cjs'; // eslint-disable-line no-unused-vars
 
 const _simulateClickOnElement = (element) => {
     if (element.length === 0) {
@@ -12,12 +12,12 @@ const _simulateClickOnElement = (element) => {
 };
 
 module.exports = {
-    createDefDatetime: (props) => {
-        return mount(<DefDatetime {...props} />);
+    createDefDateTime: (props) => {
+        return mount(<DefDateTime {...props} />);
     },
 
-    createDefDatetimeShallow: (props) => {
-        return shallow(<DefDatetime {...props} />);
+    createDefDateTimeShallow: (props) => {
+        return shallow(<DefDateTime {...props} />);
     },
 
     /*

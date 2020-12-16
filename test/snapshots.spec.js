@@ -1,7 +1,7 @@
 /* global it, describe, expect, jest */
 
 import React from 'react'; // eslint-disable-line no-unused-vars
-import DefDatetime from '../src/DefDateTime';
+import DefDateTime from '../src/DefDateTime';
 import renderer from 'react-test-renderer';
 
 // findDOMNode is not supported by the react-test-renderer,
@@ -19,21 +19,28 @@ Date.now = jest.fn(() => 1482363367071);
 
 it('everything default: renders correctly', () => {
     const tree = renderer.create(
-        <DefDatetime />
+        <DefDateTime />
     ).toJSON();
     expect(tree).toMatchSnapshot();
 });
 
 it('value: set to arbitrary value', () => {
     const tree = renderer.create(
-        <DefDatetime defaultValue={Date.now()} />
+        <DefDateTime value={new Date(Date.now)} />
     ).toJSON();
     expect(tree).toMatchSnapshot();
 });
 
 it('defaultValue: set to arbitrary value', () => {
     const tree = renderer.create(
-        <DefDatetime defaultValue={Date.now()} />
+        <DefDateTime defaultValue={Date.now()} />
+    ).toJSON();
+    expect(tree).toMatchSnapshot();
+});
+
+it('initialValue: set to arbitrary value', () => {
+    const tree = renderer.create(
+        <DefDateTime initialValue={new Date(Date.now())} />
     ).toJSON();
     expect(tree).toMatchSnapshot();
 });
@@ -41,14 +48,14 @@ it('defaultValue: set to arbitrary value', () => {
 describe('dateFormat', () => {
     it('set to true', () => {
         const tree = renderer.create(
-            <DefDatetime dateFormat={true} />
+            <DefDateTime dateFormat={true} />
         ).toJSON();
         expect(tree).toMatchSnapshot();
     });
 
     it('set to false', () => {
         const tree = renderer.create(
-            <DefDatetime dateFormat={false} />
+            <DefDateTime dateFormat={false} />
         ).toJSON();
         expect(tree).toMatchSnapshot();
     });
@@ -57,14 +64,14 @@ describe('dateFormat', () => {
 describe('timeFormat', () => {
     it('set to true', () => {
         const tree = renderer.create(
-            <DefDatetime timeFormat={true} />
+            <DefDateTime timeFormat={true} />
         ).toJSON();
         expect(tree).toMatchSnapshot();
     });
 
     it('set to false', () => {
         const tree = renderer.create(
-            <DefDatetime timeFormat={false} />
+            <DefDateTime timeFormat={false} />
         ).toJSON();
         expect(tree).toMatchSnapshot();
     });
@@ -73,14 +80,14 @@ describe('timeFormat', () => {
 describe('input', () => {
     it('input: set to true', () => {
         const tree = renderer.create(
-            <DefDatetime input={true} />
+            <DefDateTime input={true} />
         ).toJSON();
         expect(tree).toMatchSnapshot();
     });
 
     it('input: set to false', () => {
         const tree = renderer.create(
-            <DefDatetime input={false} />
+            <DefDateTime input={false} />
         ).toJSON();
         expect(tree).toMatchSnapshot();
     });
@@ -89,14 +96,14 @@ describe('input', () => {
 describe('open', () => {
     it('set to true', () => {
         const tree = renderer.create(
-            <DefDatetime open={true} />
+            <DefDateTime open={true} />
         ).toJSON();
         expect(tree).toMatchSnapshot();
     });
 
     it('set to false', () => {
         const tree = renderer.create(
-            <DefDatetime open={false} />
+            <DefDateTime open={false} />
         ).toJSON();
         expect(tree).toMatchSnapshot();
     });
@@ -105,28 +112,33 @@ describe('open', () => {
 describe('viewMode', () => {
     it('set to days', () => {
         const tree = renderer.create(
-            <DefDatetime viewMode={'days'} />
+            <DefDateTime viewMode={'days'} />
         ).toJSON();
         expect(tree).toMatchSnapshot();
     });
-
+    it ('set to quarters', () => {
+        const tree = renderer.create(
+            <DefDateTime viewMode={'quarters'}/>
+        ).toJSON();
+        expect(tree).toMatchSnapshot();
+    });
     it('set to months', () => {
         const tree = renderer.create(
-            <DefDatetime viewMode={'months'} />
+            <DefDateTime viewMode={'months'} />
         ).toJSON();
         expect(tree).toMatchSnapshot();
     });
 
     it('set to years', () => {
         const tree = renderer.create(
-            <DefDatetime viewMode={'years'} />
+            <DefDateTime viewMode={'years'} />
         ).toJSON();
         expect(tree).toMatchSnapshot();
     });
 
     it('set to time', () => {
         const tree = renderer.create(
-            <DefDatetime viewMode={'time'} />
+            <DefDateTime viewMode={'time'} />
         ).toJSON();
         expect(tree).toMatchSnapshot();
     });
@@ -134,7 +146,7 @@ describe('viewMode', () => {
 
 it('className: set to arbitraty value', () => {
     const tree = renderer.create(
-        <DefDatetime className={'arbitrary-value'} />
+        <DefDateTime className={'arbitrary-value'} />
     ).toJSON();
     expect(tree).toMatchSnapshot();
 });
@@ -142,45 +154,45 @@ it('className: set to arbitraty value', () => {
 describe('inputProps', () => {
     it('with placeholder specified', () => {
         const tree = renderer.create(
-            <DefDatetime inputProps={{ placeholder: 'arbitrary-placeholder' }} />
+            <DefDateTime inputProps={{ placeholder: 'arbitrary-placeholder' }} />
         ).toJSON();
         expect(tree).toMatchSnapshot();
     });
 
     it('with disabled specified', () => {
         const tree = renderer.create(
-            <DefDatetime inputProps={{ disabled: true }} />
+            <DefDateTime inputProps={{ disabled: true }} />
         ).toJSON();
         expect(tree).toMatchSnapshot();
     });
 
     it('with required specified', () => {
         const tree = renderer.create(
-            <DefDatetime inputProps={{ required: true }} />
+            <DefDateTime inputProps={{ required: true }} />
         ).toJSON();
         expect(tree).toMatchSnapshot();
     });
 
     it('with name specified', () => {
         const tree = renderer.create(
-            <DefDatetime inputProps={{ name: 'arbitrary-name' }} />
+            <DefDateTime inputProps={{ name: 'arbitrary-name' }} />
         ).toJSON();
         expect(tree).toMatchSnapshot();
     });
 
     it('with className specified', () => {
         const tree = renderer.create(
-            <DefDatetime inputProps={{ className: 'arbitrary-className' }} />
+            <DefDateTime inputProps={{ className: 'arbitrary-className' }} />
         ).toJSON();
         expect(tree).toMatchSnapshot();
     });
 });
 
 it('isValidDate: only valid if after yesterday', () => {
-    const yesterday = DefDatetime.moment().subtract(1, 'day');
+    const yesterday = DefDateTime.moment().subtract(1, 'day');
     const valid = (current) => current.isAfter(yesterday);
     const tree = renderer.create(
-        <DefDatetime isValidDate={ valid } />
+        <DefDateTime isValidDate={ valid } />
     ).toJSON();
     expect(tree).toMatchSnapshot();
 });
@@ -188,7 +200,7 @@ it('isValidDate: only valid if after yesterday', () => {
 it('renderDay: specified', () => {
     const renderDay = (props, currentDate) => <td {...props}>{ '0' + currentDate.date() }</td>;
     const tree = renderer.create(
-        <DefDatetime renderDay={renderDay} />
+        <DefDateTime renderDay={renderDay} />
     ).toJSON();
     expect(tree).toMatchSnapshot();
 });
@@ -196,7 +208,7 @@ it('renderDay: specified', () => {
 it('renderMonth: specified', () => {
     const renderMonth = (props, currentDate) => <td {...props}>{ '0' + currentDate.date() }</td>;
     const tree = renderer.create(
-        <DefDatetime renderMonth={renderMonth} />
+        <DefDateTime renderMonth={renderMonth} />
     ).toJSON();
     expect(tree).toMatchSnapshot();
 });
@@ -204,7 +216,7 @@ it('renderMonth: specified', () => {
 it('renderYear: specified', () => {
     const renderYear = (props, currentDate) => <td {...props}>{ '0' + currentDate.date() }</td>;
     const tree = renderer.create(
-        <DefDatetime renderYear={renderYear} />
+        <DefDateTime renderYear={renderYear} />
     ).toJSON();
     expect(tree).toMatchSnapshot();
 });

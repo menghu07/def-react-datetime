@@ -12,7 +12,7 @@ export default class QuartersView extends React.Component {
                 </table>
                 <table>
                     <tbody>
-                        { this.renderMonths() }
+                        { this.renderQuarters() }
                     </tbody>
                 </table>
             </div>
@@ -33,14 +33,14 @@ export default class QuartersView extends React.Component {
         );
     }
 
-    renderMonths() {
-        // 12 months in 3 rows for every view
-        let rows = [ [], [], [] ];
+    renderQuarters() {
+        // 12 months in 2 rows for every view
+        let rows = [ [], [] ];
 
-        for ( let month = 0; month < 12; month++ ) {
+        for ( let month = 0; month < 12; month += 3 ) {
             let row = getRow( rows, month );
 
-            row.push( this.renderMonth( month ) );
+            row.push( this.renderQuarter( month ) );
         }
 
         return rows.map( (months, i) => (
@@ -48,12 +48,12 @@ export default class QuartersView extends React.Component {
         ));
     }
 
-    renderMonth( month ) {
+    renderQuarter(month ) {
         const selectedDate = this.props.selectedDate;
         let className = 'rdtMonth';
         let onClick;
 
-        if ( this.isDisabledMonth( month ) ) {
+        if ( this.isDisabledQuarter( month ) ) {
             className += ' rdtDisabled';
         }
         else {
@@ -77,12 +77,12 @@ export default class QuartersView extends React.Component {
 
         return (
             <td { ...props }>
-                { this.getMonthText( month ) }
+                { QuartersView.getQuarterText( month ) }
             </td>
         );
     }
 
-    isDisabledMonth( month ) {
+    isDisabledQuarter( month ) {
         let isValidDate = this.props.isValidDate;
 
         if ( !isValidDate ) {
@@ -90,9 +90,9 @@ export default class QuartersView extends React.Component {
             return false;
         }
 
-        // If one day in the month is valid, the year should be clickable
+        // If one day in the quarter is valid, the year should be clickable
         let date = this.props.viewDate.clone().set({month});
-        let day = date.endOf( 'month' ).date() + 1;
+        let day = date.endOf( 'quarter' ).date() + 1;
 
         while ( day-- > 1 ) {
             if ( isValidDate( date.date(day) ) ) {
@@ -102,13 +102,12 @@ export default class QuartersView extends React.Component {
         return true;
     }
 
-    getMonthText( month ) {
-        const localMoment = this.props.viewDate;
-        const monthStr = localMoment.localeData().monthsShort( localMoment.month( month ) );
-
-        // Because some months are up to 5 characters long, we want to
-        // use a fixed string length for consistency
-        return capitalize( monthStr.substring( 0, 3 ) );
+    static getQuarterText( month ) {
+        let monthNum = Number(month);
+        if (Number.isInteger(monthNum)) {
+            return 'Q' + (Math.ceil((monthNum + 1) / 3));
+        }
+        return month;
     }
 
     _updateSelectedMonth = event => {
@@ -116,17 +115,10 @@ export default class QuartersView extends React.Component {
     }
 }
 
-function getRow( rows, year ) {
-    if ( year < 4 ) {
+function getRow( rows, month ) {
+    if ( month < 6 ) {
         return rows[0];
     }
-    if ( year < 8 ) {
-        return rows[1];
-    }
 
-    return rows[2];
-}
-
-function capitalize( str ) {
-    return str.charAt( 0 ).toUpperCase() + str.slice( 1 );
+    return rows[1];
 }

@@ -7,19 +7,45 @@ import DefDateTime from '../DefDateTime';
 // import 'moment/locale/tzm-latn';
 // moment.locale('tzm-latn');
 
-import moment from 'moment';
 import 'moment/locale/zh-cn';
-moment.locale('zh-cn');
+// moment.locale('zh-cn');
 
-class App extends React.Component { 
+class App extends React.Component {
     state = {
         date: new Date()
     };
 
+    onChangeDateTime(date) {
+        console.log('date = ' + date);
+        //季视图赋值选项
+        let datetimeFormat = 'YYYYQQ';
+        if (datetimeFormat.indexOf('QQ')) {
+            let replaceWith$ = datetimeFormat.replace('QQ', '$Q');
+            console.log('季周期' + date.format(replaceWith$).replace(/\$/g, 'Q'));
+        } else {
+            console.log('季周期' + date.format(datetimeFormat));
+        }
+    }
+
+    isValidDate(currentDate) {
+        //季视图赋值选项
+        let datetimeFormat = 'YYYYMMDD';
+        let currentQuarter;
+        if (datetimeFormat.indexOf('QQ')) {
+            let replaceWith$ = datetimeFormat.replace('QQ', '$Q');
+            currentQuarter = currentDate.format(replaceWith$).replace(/\$/g, 'Q');
+        } else {
+            currentQuarter = currentDate.format(datetimeFormat);
+        }
+        return '20201204' <= currentQuarter;
+    }
+
     render() {
         return (
             <div>
-                <DefDateTime closeOnSelect={true} dateFormat={'YYYY-MM'} timeFormat={false} />
+                {/*<DefDateTime closeOnSelect={true} dateFormat={'YYYY-MM-DD'} timeFormat={false} onChange={this.onChangeDateTime} isValidDate={this.isValidDate}/>*/}
+                {/*<DefDateTime closeOnSelect={true} dateFormat={'YYYY-QQ'} timeFormat={false} value={new Date(2000, 0, 15, 2, 2, 2, 2)}/>*/}
+                <DefDateTime dateFormat={'YYYY'}  initialViewMode={'years'}/>
             </div>
         );
     }

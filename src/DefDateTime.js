@@ -26,7 +26,8 @@ export default class DefDateTime extends React.Component {
         value: datetype,
         initialValue: datetype,
         initialViewDate: datetype,
-        initialViewMode: TYPES.oneOf([viewModes.YEARS, viewModes.MONTHS, viewModes.DAYS, viewModes.TIME]),
+        initialViewMode: TYPES.oneOf([viewModes.YEARS, viewModes.MONTHS, viewModes.QUARTERS,
+            viewModes.DAYS, viewModes.TIME]),
         onOpen: TYPES.func,
         onClose: TYPES.func,
         onChange: TYPES.func,
@@ -53,7 +54,7 @@ export default class DefDateTime extends React.Component {
         renderDay: TYPES.func,
         renderMonth: TYPES.func,
         renderYear: TYPES.func,
-    }
+    };
 
     static defaultProps = {
         onOpen: nofn,
@@ -153,6 +154,7 @@ export default class DefDateTime extends React.Component {
                 viewProps.renderYear = props.renderYear;
                 return <YearsView {...viewProps } />;
             case viewModes.QUARTERS:
+                viewProps.renderQuarter = props.renderQuarter;
                 return <QuartersView {...viewProps} />;
             case viewModes.MONTHS:
                 // { viewDate, selectedDate, renderMonth, isValidDate, navigate, showView, updateDate }
@@ -172,7 +174,7 @@ export default class DefDateTime extends React.Component {
                 viewProps.setTime = this._setTime;
                 return <TimeView {...viewProps} />;
         }
-    }
+    };
 
     getInitialState() {
         let props = this.props;
@@ -272,6 +274,11 @@ export default class DefDateTime extends React.Component {
             return viewModes.MONTHS;
         }
 
+        //季度视图
+        if ( dateFormat.indexOf('Q') !== -1) {
+            return viewModes.QUARTERS;
+        }
+
         if ( dateFormat.indexOf('Y') !== -1 ) {
             return viewModes.YEARS;
         }
@@ -333,8 +340,10 @@ export default class DefDateTime extends React.Component {
         this.setState( update );
     }
 
-    viewToMethod = {days: 'date', months: 'month', years: 'year'};
-    nextView = { days: 'time', months: 'days', years: 'months'};
+    viewToMethod = {days: 'date', months: 'month', quarters: 'month', years: 'year'};
+    //区分季视图和月视图
+    nextView = { days: 'time', months: 'days', years: (this.props.initialViewMode || this.getInitialView()) === viewModes.QUARTERS
+        ? 'quarters' : 'months'};
     _updateDate = e => {
         let state = this.state;
         let currentView = state.currentView;
@@ -355,7 +364,7 @@ export default class DefDateTime extends React.Component {
         let update = {viewDate: viewDate};
         if ( currentView === updateOnView ) {
             update.selectedDate = viewDate.clone();
-            update.inputValue = viewDate.format( this.getFormat('datetime') );
+            update.inputValue = DefDateTime._quarterFormat( viewDate, this.getFormat('datetime') );
 
             if ( this.props.open === undefined && this.props.input && this.props.closeOnSelect ) {
                 this._closeCalendar();
@@ -524,7 +533,7 @@ export default class DefDateTime extends React.Component {
 
     getInputValue() {
         let selectedDate = this.getSelectedDate();
-        return selectedDate ? selectedDate.format( this.getFormat('datetime') ) : this.state.inputValue;
+        return selectedDate ? DefDateTime._quarterFormat( selectedDate, this.getFormat('datetime') ) : this.state.inputValue;
     }
 
     /**
@@ -600,6 +609,30 @@ export default class DefDateTime extends React.Component {
         // should open it again see https://github.com/arqex/react-datetime/issues/717
         if ( !this.callHandler( this.props.inputProps.onClick, e ) ) return;
         this._openCalendar();
+    };
+
+    /**
+     * 季格式显示
+     * @param m
+     * @param datetimeFormat
+     * @returns {string}
+     * @private
+     */
+    static _quarterFormat(m, datetimeFormat) {
+        if (!m || m.constructor.name !== 'Moment') {
+            return '';
+        }
+        if (datetimeFormat && datetimeFormat.indexOf('Q') !== -1) {
+            //季视图赋值选项
+            if (datetimeFormat.indexOf('QQ')) {
+                let replaceWith$ = datetimeFormat.replace('QQ', '$Q');
+                return m.format( replaceWith$ ).replace(/\$/g, 'Q');
+            } else {
+                return m.format( datetimeFormat );
+            }
+        } else {
+            return m.format( datetimeFormat );
+        }
     }
 
     callHandler( method, e ) {

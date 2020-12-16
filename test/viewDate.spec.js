@@ -12,7 +12,7 @@ describe('with initialViewDate', () => {
     it('date value', () => {
         const date = new Date(2000, 0, 15, 2, 2, 2, 2),
             strDate = moment(date).format('MMMM YYYY'),
-            component = utils.createDefDatetime({initialViewDate: date});
+            component = utils.createDefDateTime({initialViewDate: date});
         expect(utils.getViewDateValue(component)).toEqual(strDate);
     });
 
@@ -20,7 +20,7 @@ describe('with initialViewDate', () => {
         const date = new Date(2000, 0, 15, 2, 2, 2, 2),
             mDate = moment(date),
             strDate = mDate.format('MMMM YYYY'),
-            component = utils.createDefDatetime({initialViewDate: mDate});
+            component = utils.createDefDateTime({initialViewDate: mDate});
         expect(utils.getViewDateValue(component)).toEqual(strDate);
     });
 
@@ -29,7 +29,7 @@ describe('with initialViewDate', () => {
             mDate = moment(date),
             strDate = mDate.format('L') + ' ' + mDate.format('LT'),
             expectedStrDate = mDate.format('MMMM YYYY'),
-            component = utils.createDefDatetime({initialViewDate: strDate});
+            component = utils.createDefDateTime({initialViewDate: strDate});
         expect(utils.getViewDateValue(component)).toEqual(expectedStrDate);
     });
 
@@ -38,21 +38,22 @@ describe('with initialViewDate', () => {
             momentDateUTC = moment.utc(date),
             strDateUTC = momentDateUTC.format('L') + ' ' + momentDateUTC.format('LT'),
             expectedStrDate = momentDateUTC.format('MMMM YYYY'),
-            component = utils.createDefDatetime({initialViewDate: strDateUTC, utc: true});
+            component = utils.createDefDateTime({initialViewDate: strDateUTC, utc: true});
         expect(utils.getViewDateValue(component)).toEqual(expectedStrDate);
     });
 
     it('invalid string value', () => {
         const strDate = 'invalid string',
             expectedStrDate = moment().format('MMMM YYYY'),
-            component = utils.createDefDatetime({initialViewDate: strDate});
+            component = utils.createDefDateTime({initialViewDate: strDate});
         expect(utils.getViewDateValue(component)).toEqual(expectedStrDate);
+
     });
 
     it('invalid moment object', () => {
         const mDate = moment(null),
             expectedStrDate = moment().format('MMMM YYYY'),
-            component = utils.createDefDatetime({initialViewDate: mDate});
+            component = utils.createDefDateTime({initialViewDate: mDate});
         expect(utils.getViewDateValue(component)).toEqual(expectedStrDate);
     });
 });
