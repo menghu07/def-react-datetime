@@ -619,11 +619,10 @@ export default class DefDateTime extends React.Component {
      * @private
      */
     static _quarterFormat(m, datetimeFormat) {
-        console.log(m + ', datetimeFormat' + datetimeFormat);
-        debugger;
-        // if (!m || m.constructor.name !== 'Moment') {
-        //     return 'FFFFFFFFFF';
-        // }
+        //Moment对象format函数存在
+        if (!m || typeof m['format'] !== 'function') {
+            return m;
+        }
         if (datetimeFormat && datetimeFormat.indexOf('Q') !== -1) {
             //季视图赋值选项
             if (datetimeFormat.indexOf('QQ')) {
