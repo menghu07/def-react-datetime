@@ -45,7 +45,7 @@ class App extends React.Component {
             <div>
                 {/*<DefDateTime closeOnSelect={true} dateFormat={'YYYY-MM-DD'} timeFormat={false} onChange={this.onChangeDateTime} isValidDate={this.isValidDate}/>*/}
                 {/*<DefDateTime closeOnSelect={true} dateFormat={'YYYY-QQ'} timeFormat={false} value={new Date(2000, 0, 15, 2, 2, 2, 2)}/>*/}
-                <DefDateTime dateFormat={'YYYY'}  initialViewMode={'years'}/>
+                <DefDateTime dateFormat={'YYYY-QQ'}  closeOnSelect={true}/>
             </div>
         );
     }
