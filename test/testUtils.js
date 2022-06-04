@@ -51,6 +51,13 @@ module.exports = {
         return _simulateClickOnElement( datetime.find(cn).at(n) );
     },
 
+    /**
+     * 清除日期
+     */
+    clickClear: (datetime) => {
+        return _simulateClickOnElement( datetime.find('.rdtClear') );
+    },
+
     /*
      * Boolean Checks
      */
@@ -132,7 +139,7 @@ module.exports = {
     },
 
     getInputValue: (datetime) => {
-        return datetime.find('.rdt > .form-control').getDOMNode().value;
+        return datetime.find('.rdt .form-control').getDOMNode().value;
     },
 
     getViewDateValue: (datetime) => {

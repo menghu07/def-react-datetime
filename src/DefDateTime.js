@@ -121,9 +121,13 @@ export default class DefDateTime extends React.Component {
                 </div>
             );
         }
-
+        //input是readonly时不展示清除按钮
+        let isInputReadonly = !!finalInputProps.readOnly;
         return (
-            <input { ...finalInputProps } />
+            <div>
+                <input { ...finalInputProps } />
+                { isInputReadonly ? null : <div className="rdtClear" onClick={this._handleClear}>×</div> }
+            </div>
         );
     }
 
@@ -409,6 +413,17 @@ export default class DefDateTime extends React.Component {
         }
 
         this.props.onChange( date );
+    }
+
+    //清除日期
+    _handleClear = e => {
+        if ( !this.callHandler( this.props.inputProps.onChange, e ) ) {
+            return;
+        }
+        let update = { inputValue: '', selectedDate: null };
+        this.setState( update, () => {
+            this.props.onChange( this.state.inputValue );
+        });
     }
 
     _openCalendar = () => {

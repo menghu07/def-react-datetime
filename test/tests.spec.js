@@ -18,7 +18,7 @@ describe('DefDateTime', () => {
         const component = utils.createDefDateTime({});
 
         expect(component).toBeDefined();
-        expect(component.find('.rdt > .form-control').length).toEqual(1);
+        expect(component.find('.rdt .form-control').length).toEqual(1);
         expect(component.find('.rdt > .rdtPicker').length).toEqual(1);
     });
 
@@ -309,7 +309,7 @@ describe('DefDateTime', () => {
     describe('with custom props', () => {
         it('input=false', () => {
             const component = utils.createDefDateTime({ input: false });
-            expect(component.find('.rdt > .form-control').length).toEqual(0);
+            expect(component.find('.rdt .form-control').length).toEqual(0);
             expect(component.find('.rdt > .rdtPicker').length).toEqual(1);
         });
 
@@ -1232,6 +1232,17 @@ describe('DefDateTime', () => {
 
         });
 
+        //清除日期
+        describe('onClear', () => {
+            it('select one day, then clear the day', done => {
+                const date = Date.UTC(2000, 0, 15, 2, 2, 2, 2),
+                    onChangeFn = jest.fn(),
+                    component = utils.createDefDateTime({ initialValue: date, onChange: onChangeFn });
+                utils.clickClear(component);
+                expect(utils.getInputValue(component)).toEqual('');
+                done();
+            });
+        });
     });
 
     describe('onNavigateForward', () => {

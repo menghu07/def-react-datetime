@@ -4,6 +4,7 @@
 
 .rdt {
   position: relative;
+  display: inline-block;
 }
 .rdtPicker {
   display: none;
@@ -215,4 +216,21 @@ td.rdtYear:hover {
 
 .rdtTime td {
   cursor: default;
+}
+
+.rdtClear {
+  position: absolute;
+  top: 2px;
+  right: 2px;
+  color: rgb(204, 204, 204);
+  font-size: 15px;
+  font-weight: lighter;
+  width: 20px;
+  cursor: default;
+  text-align: center;
+}
+.rdtClear:hover {
+  color: rgb(255, 255, 255);
+  border-radius: 10px;
+  background-color: rgba(204, 204, 204, 0.8);
 }
